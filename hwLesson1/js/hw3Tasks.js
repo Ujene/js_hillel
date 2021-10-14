@@ -11,11 +11,11 @@ const thirdPlanet = "Earth"
 //можно продолжить логический ряд констант: firstPlanet, secondPlanet etc
 
 //Task 2.2 Текущий посетитель сайта.
-let currentUser = "Dummy user";
+const currentUser = "Dummy user";
 
 //Task 3 Контекстное преобразование. При сложении строки и какого-то иного примитивного типа данных,
 // примитивный тип данных будет приведен к строковому, а после произойдет конкатенация строк
 // Почему? Магия JS и нестрогая типизация.
-let value = '10' + 10;
+const value = '10' + 10;
 console.log(typeof value);
 console.log(value)

@@ -5,8 +5,8 @@ checkOperationType(prompt("Для выбора операции введите '
 
 function checkOperationType(operationType) {
   if (operationType === 'add' || operationType === 'sub' || operationType === 'mult' || operationType === 'div') {
-    let op1 = checkOperandType(prompt("Введите первое число"));
-    let op2 = checkOperandType(prompt("Введите второе число"));
+    const op1 = checkOperandType(prompt("Введите первое число"));
+    const op2 = checkOperandType(prompt("Введите второе число"));
     switch (operationType) {
       case "add":
         add(op1, op2);
@@ -37,26 +37,25 @@ function checkOperandType(variable) {
 }
 
 function divide(op1, op2) {
+  const res = op1 / op2;
   if (op2 !== 0) {
-    let res = op1 / op2;
     alert(`Результат деления: ${op1} / ${op2} = ${res}`)
   } else {
-    let res = op1 / op2;
-    alert(`Второе число 0, результат непредсказуем и вот он: ${res}`)
+    alert(`Делитель равен 0, результат бесконечность: ${res}`)
   }
 }
 
 function add(op1, op2) {
-  let res = op1 + op2;
+  const res = op1 + op2;
   alert(`Результат сложения: ${op1} + ${op2} = ${res}`);
 }
 
 function multiply(op1, op2) {
-  let res = op1 * op2;
+  const res = op1 * op2;
   alert(`Результат умножения: ${op1} * ${op2} = ${res}`)
 }
 
 function subtract(op1, op2) {
-  let res = op1 - op2;
+  const res = op1 - op2;
   alert(`Результат вычитания: ${op1} - ${op2} = ${res}`)
 }
