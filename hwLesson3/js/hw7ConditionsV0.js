@@ -24,13 +24,13 @@ if (variable !== null && (variable.length > 0) && !isNaN(Number(variable))) {
 const variable2 = (prompt("Enter something again"))
 
 switch (true) {
-    case (variable === null):
+    case (variable2 === null):
         alert("null");
         break;
-    case isNaN(Number(variable)):
+    case isNaN(Number(variable2)):
         alert("Not a Number");
         break;
-    case (variable.length > 0):
+    case (variable2.length > 0):
         alert("Empty value");
         break;
     default:
