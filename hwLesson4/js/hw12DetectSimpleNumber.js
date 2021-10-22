@@ -13,6 +13,8 @@ while (true) {
 function isNumberSimple(num) {
     if (num === 0) {
         return "вы ввели ноль, а это не тру. Я незнаю простое это число или нет"
+    } else if (num === 1 || num === -1) {
+        return true;
     } else {
         for (let i = 2; i < num; i++) {
             if ((num % i) === 0) {
