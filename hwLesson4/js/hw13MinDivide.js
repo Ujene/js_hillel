@@ -7,16 +7,18 @@
 while (true) {
     const num = prompt("Введите число и посмотрите в консоли простое ли оно. true - простое, false - сложное");
     if (!isNaN(Number(num)) && num !== null && num.length > 0) {
-        console.log(getMinDivide(num));
+        console.log(getMinDivider(num));
     } else {
         alert("В поле ввода попала какая-то ошибка, попробуйте обновить страницу и сможете снова играться");
         break;
     }
 }
 
-function getMinDivide(num) {
+function getMinDivider(num) {
     if (num < 1) {
         return NaN;
+    } else if (num === 1) {
+        return 1;
     } else {
         for (let i = 2; i < num; i++) {
             if ((num % i) === 0) {
