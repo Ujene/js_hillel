@@ -3,7 +3,7 @@
 while (true) {
     const num = prompt("Введите число и посмотрите в консоли простое ли оно. true - простое, false - сложное");
     if (!isNaN(Number(num)) && num !== null && num.length > 0) {
-        console.log(`${num} - ${isNumberSimple(num)}`);
+        console.log(`${num} - ${isNumberSimple(Number(num))}`);
     } else {
         alert("В поле ввода попала какая-то ошибка, попробуйте обновить страницу и сможете снова играться");
         break;
