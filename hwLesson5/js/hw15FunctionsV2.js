@@ -12,10 +12,10 @@
 // А вызов padString(‘hello’, 6, ‘*’, false) вернет строку *hello
 // Вызов padString(‘hello’, 2) вернет ‘he’ — если число меньше, чем размер введенной строки, нужно строку обрезать при помощи метода substr
 
-console.log(padString("", 5, 'j', false))
+console.log(padString({}, 5, 'j', false))
 
 function padString(str, charsCount, char, rightSide = true) {
-    if (str !== null && str !== undefined) {
+    if (str !== null && str !== undefined && typeof(str) === 'string') {
         if (!isNaN(Number(charsCount)) && charsCount !== null && charsCount !== undefined && String(charsCount).length > 0) {
             if (str.length < Number(charsCount)) {
                 if (char !== null && char !== undefined && char.length === 1) {
