@@ -12,26 +12,30 @@
 // А вызов padString(‘hello’, 6, ‘*’, false) вернет строку *hello
 // Вызов padString(‘hello’, 2) вернет ‘he’ — если число меньше, чем размер введенной строки, нужно строку обрезать при помощи метода substr
 
-console.log(padString({}, 5, 'j', false))
+console.log(padString("www", 9, "x", false))
 
 function padString(str, charsCount, char, rightSide = true) {
-    if (str !== null && str !== undefined && typeof(str) === 'string') {
-        if (!isNaN(Number(charsCount)) && charsCount !== null && charsCount !== undefined && String(charsCount).length > 0) {
-            if (str.length < Number(charsCount)) {
-                if (char !== null && char !== undefined && char.length === 1) {
-                    if (rightSide) {
-                        return str.concat(buildCharsString(char, charsCount - str.length));
-                    }
-                    return buildCharsString(char, charsCount - str.length).concat(str);
-                }
-                return "arg char is undefined or contains more then 1 symbol"
-            } else {
-                return str.substr(0, str.length - charsCount);
-            }
-        }
-        return "arg charsCount is undefined or NaN"
+    if (typeof (str) !== 'string') {
+        return "wrong format for 'str' argument";
     }
-    return "arg str is undefined"
+    if (typeof (charsCount) !== "number" || charsCount <= 0 ){
+        return "argument charsCount should be number and positive";
+    }
+
+    if (str.length < charsCount) {
+        if (typeof char !== "string" || char.length !== 1) {
+            return "argument char should contain string with length 1";
+        }
+
+        if(rightSide){
+            return str + buildCharsString(char, charsCount - str.length);
+        } else {
+            return buildCharsString(char, charsCount - str.length) + str;
+        }
+
+    } else {
+        return str.substring(0, charsCount);
+    }
 }
 
 function buildCharsString(char, count) {
