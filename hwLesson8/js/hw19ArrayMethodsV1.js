@@ -97,8 +97,10 @@ console.log(`Task 15: Squaring of array completed: ${arr15}`);
 const arr16 = [1,-3, 5, 6,-7, 8, 9,-11];
 const res16 = arr16.filter((value) => value < 0);
 arr16.splice(0, arr16.length);
-arr16.push(res16);
-console.log(`Task 16: Result array is ${res16}`);
+for (let i = 0; i < res16.length; i++){
+    arr16[i] = res16[i];
+}
+console.log(`Task 16: Result array is ${arr16}`);
 
 // 17. Дан массив с числами [1,-3, 5, 6,-7, 8, 9,-11]. Оставьте в нем только четные числа.
 
