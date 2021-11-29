@@ -27,8 +27,8 @@ function indexOfElement(array, elementToSearch, startSearchFrom = 0) {
 }
 
 console.log("Last index of 5 is: " + lastIndexOfElement(arr, 5));
-function lastIndexOfElement(array, elementToSearch, startSearchFrom = array.length -1){
-    let startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom;
+function lastIndexOfElement(array, elementToSearch, startSearchFrom = array.length){
+    let startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom - 1;
 
     if (startIndex > array - 1){
         return -1;
@@ -78,7 +78,7 @@ function includesIn(array, elementToSearch, startSearchFrom = 0){
 console.log("Check: Are the all items in array is numbers: " + checkEvery(arr, (value) => typeof value === 'string'));
 function checkEvery(array, everyCb, objectForThis){
     for(let i = 0; i < array.length; i++){
-        if(!everyCb(array[i])){
+        if(!everyCb(array[i], i, array)){
             return false;
         }
     }
@@ -88,7 +88,7 @@ function checkEvery(array, everyCb, objectForThis){
 console.log("Check: At least one item in array is number: " + checkSome(arr, (value) => typeof value === 'number'));
 function checkSome(array, everyCb, objectForThis){
     for(let i = 0; i < array.length; i++){
-        if(everyCb(array[i])){
+        if(everyCb(array[i], i, array)){
             return true;
         }
     }
