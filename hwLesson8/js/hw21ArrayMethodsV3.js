@@ -11,7 +11,7 @@ const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 console.log("Index of 5 is: " + indexOfElement(arr, 5));
 function indexOfElement(array, elementToSearch, startSearchFrom = 0) {
-    let startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom;
+    const startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom;
 
     if(startIndex > array.length - 1){
         return -1;
@@ -28,7 +28,7 @@ function indexOfElement(array, elementToSearch, startSearchFrom = 0) {
 
 console.log("Last index of 5 is: " + lastIndexOfElement(arr, 5));
 function lastIndexOfElement(array, elementToSearch, startSearchFrom = array.length){
-    let startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom - 1;
+    const startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom - 1;
 
     if (startIndex > array - 1){
         return -1;
@@ -65,7 +65,7 @@ function findIndexElementByExpression(array, findCb, additionalArgForCb){
 
 console.log("Check: Is 5 includes to array? result: " + includesIn(arr, 5, 4))
 function includesIn(array, elementToSearch, startSearchFrom = 0){
-    let startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom;
+    const startIndex = startSearchFrom < 0 ? (array.length - 1) - Math.abs(startSearchFrom) : startSearchFrom;
 
     for(let i = startIndex; i < array.length; i++){
         if(array[i] === elementToSearch){
