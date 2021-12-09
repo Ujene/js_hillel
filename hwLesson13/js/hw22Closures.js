@@ -23,9 +23,9 @@ function getCounter2(number) {
     function Counter(number) {
         let num = (typeof number === 'number' && !Number.isNaN(number) ? number : 0);
         return {
-            value : (() => {return num})(),
-            increase : (() => {num++})(),
-            decrease : (() => {num--})()
+            value : () => {return num},
+            increase : () => {num++},
+            decrease : () => {num--}
         }
     }
     return new Counter(number);
