@@ -10,7 +10,7 @@
 
 //
 
-function getCounter(number){
+function getCounter(number) {
     return {
         number: typeof number === 'number' && !Number.isNaN(number) ? number : 0,
         value: function () {return this.number},
@@ -19,21 +19,14 @@ function getCounter(number){
     }
 }
 
-const counter = getCounter(5);
-const counter2 = getCounter(33);
-const counter3 = getCounter("Byba");
-const counter4 = getCounter(NaN);
-
-console.log(counter === counter2); //should be false
-console.log(counter.value()); // should be 5
-console.log(counter2.value()); // should be 33
-console.log(counter3.value()); // should be 0
-console.log(counter4.value()); // should be 0
-
-counter.decrease();
-counter.decrease();
-counter3.increase();
-counter3.increase();
-
-console.log(counter.value()); //should be 3
-console.log(counter3.value()); //should be 2
+function getCounter2(number) {
+    function Counter(number) {
+        let num = (typeof number === 'number' && !Number.isNaN(number) ? number : 0);
+        return {
+            value : (() => {return num})(),
+            increase : (() => {num++})(),
+            decrease : (() => {num--})()
+        }
+    }
+    return new Counter(number);
+}
