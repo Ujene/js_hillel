@@ -89,7 +89,7 @@ console.log(`Task 14: Sum in array is ${sumOfElems}`);
 // 15. Дан массив с числами [5, 6, 7, 8, 9]. Сделайте из него массив, состоящий из квадратов этих чисел.
 
 const arr15 = [5, 6, 7, 8, 9];
-arr15.map((value, index, array) => array[index] = (value ** 2));
+arr15.map((value, index, array) => array[index] = (Math.sqrt(value)));
 console.log(`Task 15: Squaring of array completed: ${arr15}`);
 
 // 16. Дан массив с числами [1,-3, 5, 6,-7, 8, 9,-11]. Оставьте в нем только отрицательные числа.

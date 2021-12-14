@@ -16,7 +16,7 @@ alert(stepan(num, stepen));
 
 function stepan(num, stepen = 1) {
     if (isCorrectNumber(num) && isCorrectNumber(stepen)) {
-        return `Число ${num} в степени ${stepen} равно ${BigInt(num) ** BigInt(stepen)}`;
+        return `Число ${num} в степени ${stepen} равно ${Math.pow(num, stepen)}`;
     } else if (!isCorrectNumber(num)) {
         return `${num} не могу распознать тут число и в степень возвести тоже не могу`
     }
