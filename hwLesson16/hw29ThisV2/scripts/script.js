@@ -5,19 +5,19 @@
 // mul() (умножить) перемножает сохранённые значения и возвращает результат.
 
 const calculator = {
-    operandA : 0,
-    operandB : 0,
-    read : (a, b) => {
-        if (typeof a !== 'number' || typeof b !== 'number' || Number.isNaN(a) || Number.isNaN(b)){
+    operandA: 0,
+    operandB: 0,
+    read: (a, b) => {
+        if (typeof a !== 'number' || typeof b !== 'number' || Number.isNaN(a) || Number.isNaN(b)) {
             throw new Error("Arguments should have type number")
         }
         this.operandA = a;
         this.operandB = b;
     },
-    sum : () => {
+    sum: () => {
         return this.operandA + this.operandB;
     },
-    mul : () => {
+    mul: () => {
         return this.operandA * this.operandB;
     }
 }
