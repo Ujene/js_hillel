@@ -22,6 +22,7 @@ function insertInto(incomingString) {
     if (typeof incomingString !== 'string'){
         throw new TypeError("Argument should be a sting")
     }
+
     const position = getRandomPosition(incomingString.split(' ').length);
 
     function getRandomPosition(diapason) {
@@ -29,11 +30,8 @@ function insertInto(incomingString) {
 
         function fillArray(diapason) {
             const result = [];
-            while (result.length < diapason) {
-                const rndNum = Math.round(Math.random() * diapason);
-                if (!result.includes(rndNum)) {
-                    result.push(rndNum);
-                }
+            for(let i = 0; i < diapason + 1; i++){
+                result.push(i)
             }
             return result;
         }
@@ -42,7 +40,7 @@ function insertInto(incomingString) {
             if (arr.length < 1) {
                 arr = arr.concat(fillArray(diapason));
             }
-            return arr.splice(0, 1)[0]
+            return arr.splice(Math.round(Math.random() * (arr.length - 1)), 1)[0]
         }
     }
 
@@ -50,9 +48,10 @@ function insertInto(incomingString) {
         if (typeof str !== 'string' || str.length < 1){
             throw new TypeError("Argument should be a sting, and cannot be empty")
         }
+        const currentPosition = position()
         if(incomingString.length > 0){
             const result = incomingString.split(' ')
-            result.splice(position(), 0, str);
+            result.splice(currentPosition, 0, str);
             return result.join(' ');
         } else {
             return str;
@@ -60,8 +59,9 @@ function insertInto(incomingString) {
     }
 }
 
-
-const ss = insertInto('-- --');
-console.log(ss('WWW'))
-console.log(ss('WWW'))
-console.log(ss('WWW'))
+//Rows for check
+const str = insertInto('-- -- --'); //Parent string
+const triesCount = 4;
+for(let i = 0; i < triesCount; i++){
+    console.log(str('WWW')) //Inserting parasite string
+}

@@ -18,7 +18,7 @@ function getRandomGenerator() {
         if (arr.length < 1) {
             arr = arr.concat(fillArray(maxDiapason));
         }
-        return arr.splice(Math.round(Math.random() * arr.length - 1), 1)[0];
+        return arr.splice(Math.round(Math.random() * (arr.length - 1)), 1)[0];
     }
 }
 
