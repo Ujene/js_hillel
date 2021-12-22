@@ -1,3 +1,18 @@
+document.body.insertAdjacentHTML("afterend", `<div id="hw35" style="align-content: center; margin-left: 50px">byby</div>`);
+document.getElementById("hw35").innerHTML = `<button id="buildArray">List from Array</button> <button id="buildTable">Table 10x10</button> \n <div id="hw35.1"></div>`;
+const customDiv = document.getElementById("hw35.1");
+const buttonArray = document.getElementById("buildArray");
+const buttonTable = document.getElementById("buildTable");
+
+buttonArray.onclick = () => {
+    customDiv.innerHTML = `<ul>${insertToHtml(arr)}</ul>`;
+}
+
+buttonTable.onclick = () => {
+    customDiv.innerHTML = `<table>${buildTable(10,10)}</table>`;
+}
+
+
 const arr = [1, 2, [3, 4, 5], 6];
 
 function insertToHtml(arr){
@@ -15,19 +30,16 @@ function insertToHtml(arr){
 
 function buildTable(rows, columns){
     let result = '';
-    let semiResult = '';
+    let row = '';
 
-    for (let i = 0; i < rows; i++){
-        semiResult = '';
-        for (let j = 0; j < columns; j++){
-            semiResult = semiResult.concat(`<td style="border: solid 1px lightcyan;">${(i+1) * (j+1)}</td>`);
+    for (let i = 0; i < rows * columns; i++){
+        if ((i + 1) % columns === 0){
+            row = row.concat(`<td>${i + 1}</td>`)
+            result = result.concat(`<tr>${row}</tr>`)
+            row = '';
+        }else {
+            row = row.concat(`<td>${i + 1}</td>`)
         }
-        result = result.concat(`<tr>${semiResult}</tr>`)
     }
     return result;
 }
-
-document.body.insertAdjacentHTML("afterend", `<table>${buildTable(10,10)}</table>`)
-document.body.insertAdjacentHTML("afterend", `<p style="margin-left: 50px; font-size: 24px">Табличка 10 на 10</p>`)
-document.body.insertAdjacentHTML("afterend", `<ul>${insertToHtml(arr)}</ul>`);
-document.body.insertAdjacentHTML("afterend", `<p style="margin-left: 50px; font-size: 24px">Result of building list from array ${arr}</p>`);
