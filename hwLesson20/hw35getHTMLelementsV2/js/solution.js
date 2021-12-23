@@ -1,8 +1,17 @@
-document.body.insertAdjacentHTML("afterend", `<div id="hw35" style="align-content: center; margin-left: 50px">byby</div>`);
-document.getElementById("hw35").innerHTML = `<button id="buildArray">List from Array</button> <button id="buildTable">Table 10x10</button> \n <div id="hw35.1"></div>`;
+document.body.insertAdjacentHTML("afterend",
+    `<div id="hw35" style="align-content: center; margin-left: 50px"></div>`);
+document.getElementById("hw35").innerHTML = `<button id="buildArray">List from Array</button>` +
+    `<button id="buildTable">Table 10x10</button>` +
+    `<button id="infoToConsole">Info to console</button> \n` +
+    `<div id="hw35.1"></div>`;
 const customDiv = document.getElementById("hw35.1");
 const buttonArray = document.getElementById("buildArray");
 const buttonTable = document.getElementById("buildTable");
+const buttonToConsole = document.getElementById("infoToConsole")
+
+const arr = [1, 2, 3, [4, 5, [6, 7], 8, 9], 10, 11];
+
+
 
 buttonArray.onclick = () => {
     customDiv.innerHTML = `<ul>${insertToHtml(arr)}</ul>`;
@@ -12,8 +21,50 @@ buttonTable.onclick = () => {
     customDiv.innerHTML = `<table>${buildTable(10,10)}</table>`;
 }
 
+buttonToConsole.onclick = () => {
+    doChangesInList();
+    customDiv.innerText = `Изменения изначального листа видны выше, доп инфу смотреть в консоли`;
+}
 
-const arr = [1, 2, [3, 4, 5], 6];
+function doChangesInList(){
+    sendToConsoleUlAttributes();
+    updateListElements();
+}
+
+function updateListElements(){
+    const ul = document.getElementById("ulId");
+    const ulChildren = ul.children;
+
+    if(ul.hasAttribute("data-dog-tail")){
+        ul.removeAttribute("data-dog-tail");
+    }
+
+    ulChildren.item(0).setAttribute("data-my-name", "Eduard Poteshnov");
+    ulChildren.item(ulChildren.length - 1).innerText = "Hi! My name is Eduard Poteshnov";
+}
+
+function sendToConsoleUlAttributes() {
+    const ul = document.getElementById("ulId");
+    const rawAttributes = ul.attributes;
+    const attributeValuesList = [];
+    const attributeNamesList = [];
+
+    for (const rawAttribute of rawAttributes) {
+        attributeNamesList.push(rawAttribute.name)
+        attributeValuesList.push(rawAttribute.value)
+    }
+
+    console.log("Список значений атрибутов элемента списка UL");
+    for (let i = 0; i < attributeValuesList.length; i++) {
+        console.log(attributeValuesList[i]);
+    }
+    console.log(" ");
+    console.log("Список имен атрибутов элемента списка UL")
+    for (let i = 0; i < attributeNamesList.length; i++) {
+        console.log(attributeNamesList[i]);
+    }
+    console.log(" ");
+}
 
 function insertToHtml(arr){
     let result = '';
