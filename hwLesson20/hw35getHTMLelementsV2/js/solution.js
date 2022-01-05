@@ -1,94 +1,119 @@
-document.body.insertAdjacentHTML("afterend",
-    `<div id="hw35" style="align-content: center; margin-left: 50px"></div>`);
-document.getElementById("hw35").innerHTML = `<button id="buildArray">List from Array</button>` +
-    `<button id="buildTable">Table 10x10</button>` +
-    `<button id="infoToConsole">Info to console</button> \n` +
-    `<div id="hw35.1"></div>`;
-const customDiv = document.getElementById("hw35.1");
-const buttonArray = document.getElementById("buildArray");
-const buttonTable = document.getElementById("buildTable");
-const buttonToConsole = document.getElementById("infoToConsole")
+(() => {
+    //Environment preparation begin
+    const additionalDiv = document.createElement("div");
+    const additionalDiv2 = document.createElement("div");
 
-const arr = [1, 2, 3, [4, 5, [6, 7], 8, 9], 10, 11];
+    const createListButton = document.createElement("button");
+    createListButton.innerText = "Display List";
 
-buttonArray.onclick = () => {
-    customDiv.innerHTML = `<ul>${insertToHtml(arr)}</ul>`;
-}
+    const createTableButton = document.createElement("button");
+    createTableButton.innerText = "Display Table";
 
-buttonTable.onclick = () => {
-    customDiv.innerHTML = `<table>${buildTable(10,10)}</table>`;
-}
+    const doChangesButton = document.createElement("button");
+    doChangesButton.innerText = "Do changes";
 
-buttonToConsole.onclick = () => {
-    doChangesInList();
-    customDiv.innerText = `Изменения изначального листа видны выше, доп инфу смотреть в консоли`;
-}
+    document.body.append(additionalDiv);
+    additionalDiv.append(createListButton);
+    additionalDiv.append(createTableButton);
+    additionalDiv.append(doChangesButton);
+    additionalDiv.append(additionalDiv2);
 
-function doChangesInList(){
-    sendToConsoleUlAttributes();
-    updateListElements();
-}
+    createListButton.addEventListener("click",
+        (event) => {
+            clearElement(additionalDiv2);
+            inputListToElement(additionalDiv2, arr);
+        });
 
-function updateListElements(){
-    const ul = document.getElementById("ulId");
-    const ulChildren = ul.children;
+    createTableButton.addEventListener("click",
+        (event) => {
+            clearElement(additionalDiv2);
+            buildTable(additionalDiv2, 10, 10);
+        })
 
-    if(ul.hasAttribute("data-dog-tail")){
-        ul.removeAttribute("data-dog-tail");
-    }
+    doChangesButton.addEventListener("click",
+        (event) => {
+            doTheHarlemShake(document.getElementById("ulId"));
+        })
+    //Environment preparation end
 
-    ulChildren.item(0).setAttribute("data-my-name", "Eduard Poteshnov");
-    ulChildren.item(ulChildren.length - 1).innerText = "Hi! My name is Eduard Poteshnov";
-}
+    //test array
+    const arr = [1, 2, 3, [4, 5], 6, [7, 8, [9, 10], 11, 12], 13];
 
-function sendToConsoleUlAttributes() {
-    const ul = document.getElementById("ulId");
-    const rawAttributes = ul.attributes;
-    const attributeValuesList = [];
-    const attributeNamesList = [];
-
-    for (const rawAttribute of rawAttributes) {
-        attributeNamesList.push(rawAttribute.name)
-        attributeValuesList.push(rawAttribute.value)
-    }
-
-    console.log("Список значений атрибутов элемента списка UL");
-    for (let i = 0; i < attributeValuesList.length; i++) {
-        console.log(attributeValuesList[i]);
-    }
-    console.log(" ");
-    console.log("Список имен атрибутов элемента списка UL")
-    for (let i = 0; i < attributeNamesList.length; i++) {
-        console.log(attributeNamesList[i]);
-    }
-    console.log(" ");
-}
-
-function insertToHtml(arr){
-    let result = '';
-    for(let i = 0; i < arr.length; i++){
-        if (Array.isArray(arr[i])){
-            result = result.concat(`<ul>${insertToHtml(arr[i])}</ul> \n`);
-        } else {
-            result = result.concat(`<li>${arr[i]}</li> \n`)
+    function clearElement(where) {
+        const collection = where.children;
+        if (collection.length > 0) {
+            for (let i = 0; i < collection.length; i++) {
+                where.removeChild(collection[i]);
+            }
         }
     }
 
-    return result;
-}
+    function inputListToElement(where, array) {
+        where.append(buildList(array));
 
-function buildTable(rows, columns){
-    let result = '';
-    let row = '';
-
-    for (let i = 0; i < rows * columns; i++){
-        if ((i + 1) % columns === 0){
-            row = row.concat(`<td>${i + 1}</td>`)
-            result = result.concat(`<tr>${row}</tr>`)
-            row = '';
-        }else {
-            row = row.concat(`<td>${i + 1}</td>`)
+        function buildList(arr) {
+            const list = document.createElement("ul");
+            for (let i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    list.append(buildList(arr[i]));
+                } else {
+                    const newLi = document.createElement("li");
+                    newLi.innerText = arr[i];
+                    list.append(newLi);
+                }
+            }
+            return list;
         }
     }
-    return result;
-}
+
+    function buildTable(where, rows, cols) {
+        const table = document.createElement("table");
+        let row = document.createElement("tr");
+
+        for (let i = 0; i < rows * cols; i++) {
+            if ((i + 1) % cols === 0) {
+                let td = document.createElement("td")
+                td.innerText = String(i + 1);
+                row.append(td);
+                table.append(row);
+                row = document.createElement("tr");
+            } else {
+                const td = document.createElement("td");
+                td.innerText = String(i + 1);
+                row.append(td);
+            }
+        }
+        where.append(table);
+    }
+
+    function doTheHarlemShake(where) {
+        getAttributesToArray(where);
+        updateLiElements(where);
+
+        function getAttributesToArray(where) {
+            const arrNames = [];
+            const arrValues = [];
+            const attributes = where.attributes;
+
+            for (const attribute of attributes) {
+                arrNames.push(attribute.name);
+                arrValues.push(attribute.value);
+            }
+            return {
+                names: arrNames,
+                values: arrValues
+            };
+        }
+
+        function updateLiElements(where) {
+            const firstChild = where.firstElementChild;
+            const lastChild = where.lastElementChild;
+
+            firstChild.setAttribute("data-my-name", "Eduard");
+            lastChild.innerText = "Hello my name is Eduard"
+            if (lastChild.hasAttribute("data-dog-tail")) {
+                lastChild.removeAttribute("data-dog-tail");
+            }
+        }
+    }
+})();
